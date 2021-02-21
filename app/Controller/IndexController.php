@@ -23,4 +23,11 @@ class IndexController extends Controller
             'message' => 'Hello Hyperf.',
         ]);
     }
+
+    public function name()
+    {
+        return $this->response->success(
+            env('APP_NAME', 'biz-skeleton')
+        );
+    }
 }

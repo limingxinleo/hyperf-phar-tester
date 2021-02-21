@@ -65,4 +65,12 @@ class ExampleTest extends HttpTestCase
         $this->assertSame($id, $data[AppendRequestIdProcessor::REQUEST_ID]);
         $this->assertInstanceOf(Request::class, $data[ServerRequestInterface::class]);
     }
+
+    public function testEnv()
+    {
+        $data = $this->get('/name');
+
+        $this->assertSame(0, $data['code']);
+        $this->assertSame('hyperf-phar-tester', $data['data']);
+    }
 }

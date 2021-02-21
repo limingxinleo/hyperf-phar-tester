@@ -38,6 +38,4 @@ jobs:
       - name: Setup Packages
         run: composer update -o
       - name: Run Test Cases
-        run: |
-          composer analyse
-          composer test
+        run: composer test
