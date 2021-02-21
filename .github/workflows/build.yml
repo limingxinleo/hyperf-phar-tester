@@ -38,8 +38,8 @@ jobs:
           docker build . -t build:latest
           docker run --name build --entrypoint php build:latest /opt/www/bin/hyperf.php phar:build --name tester.phar -M .env
           docker cp build:/opt/www/tester.phar .
-          php tester.phar -N biz-skeleton
+          php tester.phar show:name -N biz-skeleton
           echo APP_NAME=tester > .env
-          php tester.phar -N tester
+          php tester.phar show:name -N tester
 
 
