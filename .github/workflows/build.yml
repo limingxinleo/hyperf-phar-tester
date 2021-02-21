@@ -1,4 +1,4 @@
-name: Build Docker
+name: Build
 
 on: [push, pull_request]
 
@@ -10,3 +10,36 @@ jobs:
         uses: actions/checkout@v2
       - name: Build
         run: docker build -t biz-skeleton .
+  build-phar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: phpize
+          ini-values: extension=swoole, opcache.enable_cli=1, swoole.use_shortname='Off'
+          coverage: none
+      - name: Setup Swoole
+        run: |
+          wget https://github.com/swoole/swoole-src/archive/v4.6.3.tar.gz -O swoole.tar.gz
+          mkdir -p swoole
+          tar -xf swoole.tar.gz -C swoole --strip-components=1
+          rm swoole.tar.gz
+          cd swoole
+          phpize
+          ./configure --enable-openssl --enable-mysqlnd --enable-http2
+          make -j$(nproc)
+          sudo make install
+      - name: Build
+        run: |
+          docker build . -t build:latest
+          docker run --name build --entrypoint php build:latest /opt/www/bin/hyperf.php phar:build --name tester.phar -M .env
+          docker cp build:/opt/www/tester.phar .
+          php tester.phar -N biz-skeleton
+          echo APP_NAME=tester > .env
+          php tester.phar -N tester
+
+

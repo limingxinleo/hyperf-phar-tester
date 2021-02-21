@@ -38,4 +38,6 @@ jobs:
       - name: Setup Packages
         run: composer update -o
       - name: Run Test Cases
-        run: composer test
+        run: |
+          cp .env.example .env
+          composer test
