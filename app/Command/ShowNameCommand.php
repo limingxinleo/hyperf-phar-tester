@@ -44,7 +44,7 @@ class ShowNameCommand extends HyperfCommand
 
     public function handle()
     {
-        $this->line($name = env('APP_NAME'));
+        $this->line($name = env('APP_NAME', 'null'));
 
         if ($name !== $this->input->getOption('name')) {
             throw new BusinessException(ErrorCode::SERVER_ERROR);
