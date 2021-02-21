@@ -20,7 +20,7 @@ jobs:
         with:
           php-version: '7.4'
           tools: phpize
-          ini-values: extension=swoole, opcache.enable_cli=1, swoole.use_shortname='Off', phar.readonly='On'
+          ini-values: extension=swoole, opcache.enable_cli=1, swoole.use_shortname='Off', phar.readonly='Off'
           coverage: none
       - name: Setup Swoole
         run: |
