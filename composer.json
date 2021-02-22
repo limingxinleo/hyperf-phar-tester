@@ -30,7 +30,7 @@
         "hyperf/framework": "2.1.*",
         "hyperf/http-server": "2.1.*",
         "hyperf/logger": "2.1.*",
-        "hyperf/phar": "2.1.x-dev",
+        "hyperf/phar": "2.1.*",
         "hyperf/server": "2.1.*",
         "hyperf/utils": "2.1.*"
     },
