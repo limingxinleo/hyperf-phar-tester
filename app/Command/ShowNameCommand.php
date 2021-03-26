@@ -13,6 +13,7 @@ namespace App\Command;
 
 use App\Constants\ErrorCode;
 use App\Exception\BusinessException;
+use App\Service\NameService;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Psr\Container\ContainerInterface;
@@ -44,7 +45,7 @@ class ShowNameCommand extends HyperfCommand
 
     public function handle()
     {
-        $this->line($name = env('APP_NAME', 'null'));
+        $this->line($name = di()->get(NameService::class)->getName());
 
         if ($name !== $this->input->getOption('name')) {
             throw new BusinessException(ErrorCode::SERVER_ERROR);
