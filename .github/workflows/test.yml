@@ -9,9 +9,9 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        php-version: ['7.3', '7.4']
-        swoole-version: ['4.5.11', '4.6.4']
-      max-parallel: 4
+        php-version: ['7.3', '7.4', '8.0']
+        swoole-version: ['4.5.11', '4.6.7']
+      max-parallel: 6
     env:
       SW_VERSION: ${{ matrix.swoole-version }}
     steps:
@@ -27,6 +27,7 @@ jobs:
           extensions: pdo, pdo_mysql, redis
       - name: Setup Swoole
         run: |
+          sudo apt-get update
           sudo apt-get install libcurl4-openssl-dev
           wget https://github.com/swoole/swoole-src/archive/v${SW_VERSION}.tar.gz -O swoole.tar.gz
           mkdir -p swoole
