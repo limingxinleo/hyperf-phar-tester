@@ -11,35 +11,31 @@ declare(strict_types=1);
  */
 namespace App\Command;
 
-use App\Constants\ErrorCode;
-use App\Exception\BusinessException;
-use App\Service\NameService;
 use Hyperf\Command\Annotation\Command;
 use Hyperf\Command\Command as HyperfCommand;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Console\Input\InputOption;
 
 #[Command]
-class ShowNameCommand extends HyperfCommand
+class ReadVendorBinCommand extends HyperfCommand
 {
+    protected $coroutine = false;
+
     public function __construct(protected ContainerInterface $container)
     {
-        parent::__construct('show:name');
+        parent::__construct('read:vendor-bin');
     }
 
     public function configure()
     {
         parent::configure();
-        $this->setDescription('Show App Name');
-        $this->addOption('name', 'N', InputOption::VALUE_OPTIONAL, '验证项目名');
+        $this->setDescription('Read command in vendor/bin.');
     }
 
     public function handle()
     {
-        $this->line($name = di()->get(NameService::class)->getName());
-
-        if ($name !== $this->input->getOption('name')) {
-            throw new BusinessException(ErrorCode::SERVER_ERROR);
+        system('vendor/bin/php-parse', $code);
+        if($code === 127){
+            exit(127);
         }
     }
 }
