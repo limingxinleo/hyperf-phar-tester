@@ -13,6 +13,8 @@ namespace App\Service;
 
 use Han\Utils\Service;
 
+use function Hyperf\Support\env;
+
 class EnvService extends Service
 {
     public function get(string $name, $default = null)

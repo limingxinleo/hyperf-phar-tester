@@ -16,11 +16,8 @@ use Hyperf\Di\Annotation\Inject;
 
 class NameService extends Service
 {
-    /**
-     * @Inject
-     * @var EnvService
-     */
-    protected $env;
+    #[Inject]
+    protected EnvService $env;
 
     public function getName(): string
     {
