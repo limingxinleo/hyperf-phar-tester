@@ -18,7 +18,7 @@ use Psr\Container\ContainerInterface;
 #[Command]
 class ReadVendorBinCommand extends HyperfCommand
 {
-    protected $coroutine = false;
+    protected bool $coroutine = false;
 
     public function __construct(protected ContainerInterface $container)
     {
@@ -34,7 +34,7 @@ class ReadVendorBinCommand extends HyperfCommand
     public function handle()
     {
         system('vendor/bin/php-parse', $code);
-        if($code === 127){
+        if ($code === 127) {
             exit(127);
         }
     }

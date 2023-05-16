@@ -13,9 +13,10 @@ namespace HyperfTest\Cases;
 
 use App\Kernel\Context\Coroutine;
 use App\Kernel\Log\AppendRequestIdProcessor;
+use Hyperf\Context\Context;
 use Hyperf\Engine\Channel;
-use Hyperf\Utils\Context;
 use HyperfTest\HttpTestCase;
+use Throwable;
 
 /**
  * @internal
@@ -52,7 +53,7 @@ class ExampleTest extends HttpTestCase
             try {
                 $all = Context::getContainer();
                 $pool->push((array) $all);
-            } catch (\Throwable $exception) {
+            } catch (Throwable $exception) {
                 $pool->push(false);
             }
         });
