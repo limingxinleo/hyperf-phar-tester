@@ -9,7 +9,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build
-        run: docker build -t biz-skeleton .
+        run: |
+          docker build -t biz-skeleton .
+          docker run --name unit -d biz-skeleton:latest
+          docker exec unit composer install
+          docker exec unit composer test
   build-phar:
     runs-on: ubuntu-latest
     steps:
@@ -41,5 +45,4 @@ jobs:
           php tester.phar show:name -N null
           echo APP_NAME=tester > .env
           php tester.phar show:name -N tester
-
 

@@ -26,7 +26,7 @@
         "hyperf/constants": "3.1.*",
         "hyperf/context": "3.1.*",
         "hyperf/contract": "3.1.*",
-        "hyperf/coroutine": "3.1.*",
+        "hyperf/coroutine": "3.1.x-dev",
         "hyperf/database": "3.1.*",
         "hyperf/db-connection": "3.1.*",
         "hyperf/di": "3.1.*",
@@ -83,10 +83,10 @@
         "post-autoload-dump": [
             "rm -rf runtime/container"
         ],
-        "analyse": "phpstan analyse --memory-limit 512M -l 0 -c phpstan.neon ./app ./config",
+        "analyse": "phpstan analyse --memory-limit 512M",
         "cs-fix": "php-cs-fixer fix $1",
         "start": "php ./bin/hyperf.php start",
-        "test": "co-phpunit --prepend test/bootstrap.php -c phpunit.xml --colors=always",
+        "test": "co-phpunit --prepend test/bootstrap.php --colors=always",
         "rector": "rector process --clear-cache"
     }
 }

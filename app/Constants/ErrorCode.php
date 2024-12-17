@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace App\Constants;
 
 use Hyperf\Constants\Annotation\Constants;
+use Hyperf\Constants\Annotation\Message;
 use Hyperf\Constants\EnumConstantsTrait;
 
 #[Constants]
@@ -20,12 +21,10 @@ enum ErrorCode: int implements ErrorCodeInterface
 {
     use EnumConstantsTrait;
 
-    /**
-     * @Message("Server Error")
-     */
+    #[Message('Server Error')]
     case SERVER_ERROR = 500;
 
-    public function getMessage(array $translate = null): string
+    public function getMessage(?array $translate = null): string
     {
         $arguments = [];
         if ($translate) {
